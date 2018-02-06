@@ -50,6 +50,8 @@ requirejs(['../src/WorldWind',
             "plain-teal.png",
             "plain-white.png",
             "plain-yellow.png",
+            "push-pin-red.png",
+            "push-pin-yellow.png",
             "castshadow-black.png",
             "castshadow-blue.png",
             "castshadow-brown.png",
@@ -71,11 +73,11 @@ requirejs(['../src/WorldWind',
             longitude = -121.129722;
 
         // Set up the common placemark attributes.
-        placemarkAttributes.imageScale = 1;
+        placemarkAttributes.imageScale = 3;
         placemarkAttributes.imageOffset = new WorldWind.Offset(
             WorldWind.OFFSET_FRACTION, 0.3,
             WorldWind.OFFSET_FRACTION, 0.0);
-        placemarkAttributes.imageColor = WorldWind.Color.WHITE;
+        placemarkAttributes.imageColor = WorldWind.Color.WHITE  ;
         placemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
             WorldWind.OFFSET_FRACTION, 0.5,
             WorldWind.OFFSET_FRACTION, 1.0);
@@ -102,7 +104,7 @@ requirejs(['../src/WorldWind',
             // the default highlight attributes so that all properties are identical except the image scale. You could
             // instead vary the color, image, or other property to control the highlight representation.
             highlightAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-            highlightAttributes.imageScale = 1.2;
+            highlightAttributes.imageScale = 3.5;
             placemark.highlightAttributes = highlightAttributes;
 
             // Add the placemark to the layer.

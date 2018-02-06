@@ -1,4 +1,4 @@
-requirejs(['../src/WorldWind',
+requirejs(['./src/WorldWind',
         './TestLayerManager'],
     function (ww,
               LayerManager) {
@@ -25,4 +25,4 @@ requirejs(['../src/WorldWind',
         for (var l = 0; l < layers.length; l++) {
             layers[l].layer.enabled = layers[l].enabled;
             wwd.addLayer(layers[l].layer);
-        }}
+        }})
