@@ -84,4 +84,10 @@ requirejs(['./src/WorldWind',
 
         // Now set up to handle highlighting.
         var highlightController = new WorldWind.HighlightController(wwd);
+
+        var PlacemarkName = 0;
+
+        for (var i = 0; i < PlacemarkName; i++) {
+            PlacemarkName = "Number" + "," + i++
+        }
     });
