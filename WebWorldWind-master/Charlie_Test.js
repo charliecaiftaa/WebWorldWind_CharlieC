@@ -10,6 +10,7 @@ requirejs(['./src/WorldWind',
         // Create the World Window.
         var wwd = new WorldWind.WorldWindow("canvasOne");
 
+
         // Add imagery layers.
         var layers = [
             {layer: new WorldWind.BMNGLayer(), enabled: true},
@@ -19,9 +20,20 @@ requirejs(['./src/WorldWind',
             {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}
         ];
 
+        var LayerN = [
+            {layer:[0] = "0"},
+            {layer:[1] = "1"},
+            {layer:[2] = "2"},
+            {layer:[3] = "3"},
+            {layer:[4] = "4"}
+        ];
+
         for (var l = 0; l < layers.length; l++) {
             layers[l].layer.enabled = layers[l].enabled;
             wwd.addLayer(layers[l].layer);
+            if (wwd.addLayer(layers[l].layer)){
+                    layers[l].layer = LayerN[l]
+            }
         }
 
         var placemark,
@@ -87,7 +99,4 @@ requirejs(['./src/WorldWind',
 
         var PlacemarkName = 0;
 
-        for (var i = 0; i < PlacemarkName; i++) {
-            PlacemarkName = "Number" + "," + i++
-        }
     });
