@@ -20,6 +20,7 @@ requirejs(['./src/WorldWind',
             {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}
         ];
 
+        /*
         var LayerN = [
             {layer:[0] = "0"},
             {layer:[1] = "1"},
@@ -32,10 +33,11 @@ requirejs(['./src/WorldWind',
             layers[l].layer.enabled = layers[l].enabled;
             wwd.addLayer(layers[l].layer);
             if (wwd.addLayer(layers[l].layer)){
-                    layers[l].layer = LayerN[l]
+                    layers[l].layer = "layers.[l]"
             }
         }
 
+        */
         var placemark,
             placemarkAttributes = new WorldWind.PlacemarkAttributes(null),
             highlightAttributes,
