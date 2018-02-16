@@ -17,7 +17,8 @@ requirejs(['./src/WorldWind',
             {layer: new WorldWind.BingAerialWithLabelsLayer(null), enabled: true},
             {layer: new WorldWind.CompassLayer(), enabled: true},
             {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
-            {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}
+            {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true},
+            {layer: new WorldWind.RenderableLayer(wwd), enabled: true, displayName: "PlacemarkC"}
         ];
 
         /*
@@ -28,16 +29,17 @@ requirejs(['./src/WorldWind',
             {layer:[3] = "3"},
             {layer:[4] = "4"}
         ];
-
+        */
         for (var l = 0; l < layers.length; l++) {
             layers[l].layer.enabled = layers[l].enabled;
             wwd.addLayer(layers[l].layer);
-            if (wwd.addLayer(layers[l].layer)){
-                    layers[l].layer = "layers.[l]"
-            }
+           // if (wwd.addLayer(layers[l].layer)){
+           //         layers[l].layer = "layers.[l]"
+           // }
         }
 
-        */
+
+
         var placemark,
             placemarkAttributes = new WorldWind.PlacemarkAttributes(null),
             highlightAttributes,
@@ -99,6 +101,6 @@ requirejs(['./src/WorldWind',
         // Now set up to handle highlighting.
         var highlightController = new WorldWind.HighlightController(wwd);
 
-        var PlacemarkName = 0;
+
 
     });
