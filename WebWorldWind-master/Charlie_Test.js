@@ -101,6 +101,47 @@ requirejs(['./src/WorldWind',
         // Now set up to handle highlighting.
         var highlightController = new WorldWind.HighlightController(wwd);
 
+        // Now setup a pick handler.
+
+        var sitePopUp = function(sitelabel) {
+            // Locate JSON file
+            var tokens = sitelabel.split(",");
+            //var continentCode = tokens[0];
+            //var countryCode = tokens[1];
+            var siteid = tokens[2];
+            var popupjsonpath = '//aworldbridgelabs.com:9083/popup';
+            var sitename, picpath, sitedesc, siteurl;
+
+            $.getJSON(popupjsonpath,function (res) {
+                //Get site information.
+                for (var n = 0; n < res.length; n++) {
+                    if (res[n].SiteID === siteid) {
+                        sitename = res[n].SiteName;
+                        picpath = res[n].PicPath;
+                        sitedesc = res[n].SiteDescription;
+                        siteurl = res[n].SiteURL;
+                        break;
+                    }
+                }
+
+                //Insert site information into indexTest.html.
+                var popupBodyItem = $("#popupBody");
+                popupBodyItem.children().remove();
+
+                var popupBodyName = $('<p class="site-name"><h4>' + sitename + '</h4></p>');
+                var popupBodyDesc = $('<p class="site-description">' + sitedesc + '</p><br>');
+                var popupBodyImg = $('<img class="site-img" src="' + picpath + '" /><br>');
+                var popupBodyURL = $('<p class="site-URL">Please click <a href="' + siteurl + '" target="_blank"><span id="href"><b>here</b></span></a> for more detailed information</p>');
+
+                popupBodyItem.append(popupBodyName);
+                popupBodyItem.append(popupBodyDesc);
+                popupBodyItem.append(popupBodyImg);
+                popupBodyItem.append(popupBodyURL);
+
+            });
+        };
+
+
         var handleMouseCLK = function (o) {
 
             // The input argument is either an Event or a TapRecognizer. Both have the same properties for determining
@@ -146,9 +187,8 @@ requirejs(['./src/WorldWind',
             pickList = [];
         };
 
-        wwd.addEventListener("click", handleMouseCLK);
 
-
+        /*
         // Get the modal
         var modal = document.getElementById('PlacemarkC');
 
@@ -161,17 +201,19 @@ requirejs(['./src/WorldWind',
         // When the user clicks the button, open the modal
         btn.onclick = function() {
             modal.style.display = "block";
-        }
+            placemarkLayer = "block";
+        };
 
         // When the user clicks on <span> (x), close the modal
         span.onclick = function() {
             modal.style.display = "none";
-        }
+        };
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
-            if (event.target == modal) {
+            if (event.target == placemarkLayer && modal) {
                 modal.style.display = "none";
             }
         }
+        */
     });
