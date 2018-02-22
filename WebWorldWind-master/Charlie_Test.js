@@ -18,7 +18,7 @@ requirejs(['./src/WorldWind',
             {layer: new WorldWind.CompassLayer(), enabled: true},
             {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
             {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true},
-            //{layer: new WorldWind.RenderableLayer(wwd), enabled: true, displayName: "PlacemarkC"}
+            {layer: new WorldWind.RenderableLayer(wwd), enabled: true, displayName: "PlacemarkC"}
         ];
 
         /*
@@ -74,6 +74,7 @@ requirejs(['./src/WorldWind',
 
         // Create the placemark.
         placemark = new WorldWind.Placemark(new WorldWind.Position(latitude, longitude, 1e2), false, null);
+        //placemark.label = "This is a school" + SitesPL[i].SiteID; // NA,USA,1234
         placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
 
         // Create the placemark attributes for the placemark.
