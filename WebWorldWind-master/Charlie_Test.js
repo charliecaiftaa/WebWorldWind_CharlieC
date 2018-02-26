@@ -18,7 +18,7 @@ requirejs(['./src/WorldWind',
             {layer: new WorldWind.CompassLayer(), enabled: true},
             {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
             {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true},
-            {layer: new WorldWind.RenderableLayer(wwd), enabled: true, displayName: "PlacemarkC"}
+            //{layer: new WorldWind.RenderableLayer(wwd), enabled: true, displayName: "PlacemarkC"}
         ];
 
         /*
@@ -104,6 +104,7 @@ requirejs(['./src/WorldWind',
 
         // Now setup a pick handler.
 
+        /*
         var sitePopUp = function(sitelabel) {
             // Locate JSON file
             var tokens = sitelabel.split(",");
@@ -141,6 +142,7 @@ requirejs(['./src/WorldWind',
 
             });
         };
+        */
 
 
         var handleMouseCLK = function (o) {
@@ -154,39 +156,48 @@ requirejs(['./src/WorldWind',
             // relative to the upper left corner of the canvas rather than the upper left corner of the page.
 
             var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
-            for (var q = 0; q<pickList.objects.length; q++) {
+            for (var q = 0; q < pickList.objects.length; q++) {
                 var pickedPL = pickList.objects[q].userObject;
+                console.log ("True or F: " + pickedPL instanceof WorldWind.Placemark);
+                alert("Ian");
                 if (pickedPL instanceof WorldWind.Placemark) {
 
-                    sitePopUp(pickedPL.label);
-
-                    $(document).ready(function () {
-                        // Make a popup Box after insert popup list items.
-
-                        var modal = document.getElementById('popupBox');// Get the modal
-                        var span = document.getElementById('closeIt');// Get the <span> element that closes the modal
-
-                        // When the user double clicks the placemark, open the modal
-                        modal.style.display = "block";
-
-                        // When the user clicks on <span> (x), close the modal
-                        span.onclick = function () {
-                            modal.style.display = "none";
-                        };
-
-                        // When the user clicks anywhere outside of the modal, close it
-                        window.onclick = function (event) {
-                            if (event.target == modal) {
-                                modal.style.display = "none";
-                            }
-                        }
-
-                    })
+                    //sitePopUp(pickedPL.label);
+                    alert("It Worked");
+                    // $(document).ready(function () {
+                    //     // Make a popup Box after insert popup list items.
+                    //
+                    //     var modal = document.getElementById('PlacemarkC');// Get the modal
+                    //     var span = document.getElementByClassName('closeIt');// Get the <span> element that closes the modal
+                    //
+                    //     // When the user double clicks the placemark, open the modal
+                    //     modal.style.display = "block";
+                    //
+                    //     // When the user clicks on <span> (x), close the modal
+                    //     span.onclick = function () {
+                    //         modal.style.display = "none";
+                    //     };
+                    //
+                    //     // When the user clicks anywhere outside of the modal, close it
+                    //     window.onclick = function (event) {
+                    //         if (event.target == modal) {
+                    //             modal.style.display = "none";
+                    //         }
+                    //     }
+                    //
+                    // })
                 }
             }
 
             pickList = [];
+
+            // Listen for mouse double clicks placemarks and then pop up a new dialog box.
+            wwd.addEventListener("click", handleMouseCLK);
+
+            // Listen for taps on mobile devices and then pop up a new dialog box.
+            var tapRecognizer = new WorldWind.TapRecognizer(wwd, handleMouseCLK);
         };
+
 
 
         /*
@@ -197,7 +208,7 @@ requirejs(['./src/WorldWind',
         var btn = document.getElementById("myBtn");
 
         // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
+        var span = document.getElementsByClassName("closeIt")[0];
 
         // When the user clicks the button, open the modal
         btn.onclick = function() {
